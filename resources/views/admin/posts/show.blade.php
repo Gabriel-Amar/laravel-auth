@@ -15,4 +15,9 @@
     <p>
         <h2>{{$post->category ? $post->category->name : ''}}</h2>
     </p>
+    <ul>
+        @foreach ($post->tags as $item)
+            <li>{{$item->name}}</li>
+        @endforeach
+    </ul>
 @endsection

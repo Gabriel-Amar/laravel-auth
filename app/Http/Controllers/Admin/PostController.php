@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Category;
+use App\Tag;
 use Prophecy\Call\Call;
 
 class PostController extends Controller
@@ -33,7 +34,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -59,6 +61,10 @@ class PostController extends Controller
         }
         $newPost->slug = $slug;
         $newPost->save();
+
+        if(isset($data['tags'])){
+            $newPost->tags()->sync($data['tags']);
+        }
         return redirect()->route('admin.posts.show', $newPost->id);
     }
 
