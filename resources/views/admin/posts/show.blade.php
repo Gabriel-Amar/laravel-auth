@@ -2,6 +2,8 @@
 
 
 @section('content')
+<div class="container">
+
     <h1>
         {{$post->title}}
     </h1>
@@ -20,4 +22,5 @@
             <li>{{$item->name}}</li>
         @endforeach
     </ul>
+</div>
 @endsection

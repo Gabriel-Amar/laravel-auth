@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -126,8 +126,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // $post->delete();
-        // return redirect()->route('admin.posts.index')->with('message', "Post with id: {$post->id} successfully deleted");
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
     private function getSlug($title){
 
